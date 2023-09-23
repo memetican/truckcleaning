@@ -1,0 +1,2993 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+  branch: master
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - &ref_0
+        label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - name: review
+    label: Reviews
+    folder: cms/review
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Full
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_from
+        label: From
+        widget: string
+        required: false
+      - hint: ''
+        name: f_location
+        label: Location
+        widget: string
+        required: false
+      - hint: ''
+        name: f_date
+        label: Date
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_brief
+        label: Brief
+        widget: text
+        required: false
+      - hint: ''
+        name: f_photo
+        label: Photo
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_video
+        label: Video
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Url
+            widget: string
+            required: false
+      - hint: 5 is best and should be shown on homepage
+        name: f_rating
+        label: Rating
+        widget: number
+        required: false
+      - hint: ''
+        name: f_review-of
+        label: Review Of
+        widget: relation
+        required: false
+        collection: reviews_of
+        value_field: cms/reviews-of/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: review
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[review].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: faq
+    label: FAQs
+    folder: cms/faq
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Notes
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_for
+        label: For
+        widget: select
+        required: false
+        options:
+          - label: Landlords
+            value: Landlords
+          - label: Tenants
+            value: Tenants
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: faq
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[faq].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: service
+    label: Services
+    folder: cms/service
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Text
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_subtitle
+        label: Subtitle
+        widget: string
+        required: false
+      - hint: ''
+        name: f_thumb
+        label: Thumb
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_hero-image
+        label: Hero Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_brief
+        label: Brief
+        widget: text
+        required: false
+      - hint: ''
+        name: f_featured
+        label: Featured
+        widget: boolean
+        required: false
+        default: false
+      - hint: ''
+        name: f_position
+        label: Position
+        widget: number
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: service
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[service].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: reviews_of
+    label: Review Ofs
+    folder: cms/reviews-of
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: reviews-of
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[reviews-of].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: special
+    label: Specials
+    folder: cms/special
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Text
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_brief
+        label: Brief
+        widget: text
+        required: false
+      - hint: ''
+        name: f_icon
+        label: Icon
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_texture
+        label: Texture
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_link
+        label: Link
+        widget: string
+        required: false
+      - hint: ''
+        name: f_active
+        label: Active?
+        widget: boolean
+        required: false
+        default: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: special
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[special].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: careers
+    label: Careers
+    folder: cms/careers
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Text
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_brief
+        label: Brief
+        widget: string
+        required: false
+      - hint: ''
+        name: f_job-details
+        label: Job Details
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_hero
+        label: Hero
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_enabled
+        label: Enabled?
+        widget: boolean
+        required: false
+        default: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: careers
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[careers].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: clean
+    label: Cleans
+    folder: cms/clean
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Text
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_brief
+        label: Brief
+        widget: string
+        required: false
+      - hint: ''
+        name: f_hero
+        label: Hero
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_company
+        label: Company
+        widget: relation
+        required: true
+        collection: company
+        value_field: cms/company/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: clean
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[clean].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: company
+    label: Companies
+    folder: cms/company
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Text
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_logo
+        label: Logo
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_brief
+        label: Brief
+        widget: string
+        required: false
+      - hint: ''
+        name: f_url
+        label: Url
+        widget: string
+        required: false
+      - hint: ''
+        name: f_seq
+        label: Seq
+        widget: number
+        required: false
+      - hint: ''
+        name: f_phone
+        label: Phone
+        widget: string
+        required: false
+      - hint: ''
+        name: f_address
+        label: Address
+        widget: text
+        required: false
+      - hint: ''
+        name: f_email
+        label: Email
+        widget: string
+        required: false
+      - hint: ''
+        name: f_phone-2
+        label: Phone 2
+        widget: string
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: company
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[company].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: We Clean..., key: -49ccef69'
+            label: Text
+            name: '-49ccef69'
+            widget: string
+          - hint: 'Original text: Cars & 4x4s, key: 17cb283e'
+            label: Text
+            name: 17cb283e
+            widget: string
+          - hint: 'Original text: Cars, key: 1fef3f'
+            label: Text
+            name: 1fef3f
+            widget: string
+          - hint: 'Original text: Trucks, key: -6a2bc3ec'
+            label: Text
+            name: '-6a2bc3ec'
+            widget: string
+          - hint: 'Original text: Heavy Transport, key: -12c62930'
+            label: Text
+            name: '-12c62930'
+            widget: string
+          - hint: 'Original text: Transports, key: 106dca8a'
+            label: Text
+            name: 106dca8a
+            widget: string
+          - hint: 'Original text: Auckland-wide Service, key: 6c3f0eae'
+            label: Text
+            name: 6c3f0eae
+            widget: string
+          - hint: 'Original text: We Come to You!, key: 3f2ead7d'
+            label: Text
+            name: 3f2ead7d
+            widget: string
+          - hint: 'Original text: 0800 447 666, key: -4b53ce8b'
+            label: Text
+            name: '-4b53ce8b'
+            widget: string
+          - hint: 'Original text: 09 527 7730, key: e16c09a'
+            label: Text
+            name: e16c09a
+            widget: string
+          - hint: 'Original text: Contact Us, key: 7f2746de'
+            label: Text
+            name: 7f2746de
+            widget: string
+          - hint: 'Original text: Home, key: 2268ff'
+            label: Text
+            name: 2268ff
+            widget: string
+          - hint: 'Original text: Services, key: 560f747e'
+            label: Text
+            name: 560f747e
+            widget: string
+          - hint: 'Original text: No items found., key: 3d503d2b'
+            label: Text
+            name: 3d503d2b
+            widget: string
+          - hint: 'Original text: Other Vehicles, key: 7260da17'
+            label: Text
+            name: 7260da17
+            widget: string
+          - hint: 'Original text: Airplanes & Helicopters, key: 765983c3'
+            label: Text
+            name: 765983c3
+            widget: string
+          - hint: 'Original text: Boats, key: 3d5ff13'
+            label: Text
+            name: 3d5ff13
+            widget: string
+          - hint: 'Original text: Buses, key: 3d8fb0e'
+            label: Text
+            name: 3d8fb0e
+            widget: string
+          - hint: 'Original text: Cars, 4x4''s, & SUVs, key: 14fbbbf6'
+            label: Text
+            name: 14fbbbf6
+            widget: string
+          - hint: 'Original text: Commercial Vehicles, key: 5d3ebadd'
+            label: Text
+            name: 5d3ebadd
+            widget: string
+          - hint: 'Original text: Construction Equipment, key: 28fad4ff'
+            label: Text
+            name: 28fad4ff
+            widget: string
+          - hint: 'Original text: Mining Equipment, key: c09c1be'
+            label: Text
+            name: c09c1be
+            widget: string
+          - hint: 'Original text: Motor Homes, key: -486d4037'
+            label: Text
+            name: '-486d4037'
+            widget: string
+          - hint: 'Original text: Specialised Trucks, key: 1aef1692'
+            label: Text
+            name: 1aef1692
+            widget: string
+          - hint: 'Original text: Taxis, Limosines & Ubers, key: -2b68423'
+            label: Text
+            name: '-2b68423'
+            widget: string
+          - hint: 'Original text: about us, key: 60849c11'
+            label: Text
+            name: 60849c11
+            widget: string
+          - hint: 'Original text: Contact, key: -64104400'
+            label: Text
+            name: '-64104400'
+            widget: string
+          - hint: 'Original text: Residential car valet, key: 7b33fa08'
+            label: Text
+            name: 7b33fa08
+            widget: string
+          - hint: 'Original text: We Come to Your Home or Office!, key: 66d7fef7'
+            label: Text
+            name: 66d7fef7
+            widget: string
+          - hint: >-
+              Original text: We clean your personal cars at your home or office,
+              so that you don't have to travel anywhere., key: 103ed031
+            label: Text
+            name: 103ed031
+            widget: text
+          - hint: >-
+              Original text: Just let us know where and when, and you will have
+              a beautifully clean car when you return. , key: -5246aa4b
+            label: Text
+            name: '-5246aa4b'
+            widget: text
+          - hint: >-
+              Original text: Our vans and expert cleaners are fully equipped for
+              any cleaning job., key: -3791d4a0
+            label: Text
+            name: '-3791d4a0'
+            widget: string
+          - hint: 'Original text: Reviews, key: -5b377405'
+            label: Text
+            name: '-5b377405'
+            widget: string
+          - hint: >-
+              Original text: Click on the review to see the full text, or , key:
+              5f0bd0fc
+            label: Text
+            name: 5f0bd0fc
+            widget: string
+          - hint: 'Original text: see all reviews, key: -31d0a3b1'
+            label: Text
+            name: '-31d0a3b1'
+            widget: string
+          - hint: 'Original text: ., key: 2e'
+            label: Text
+            name: 2e
+            widget: string
+          - hint: 'Original text: About Us, key: 645efc51'
+            label: Text
+            name: 645efc51
+            widget: string
+          - hint: >-
+              Original text: We pride ourselves in world class service...
+              nothing less than the highest quality vehicle washing and
+              detailing expertise in Auckland., key: 40409a5
+            label: Text
+            name: 40409a5
+            widget: text
+          - hint: >-
+              Original text: Our services cover the full range of private
+              vehicles, commercial fleets, and heavy machinery, including cars,
+              trucks, boats, airplanes, and heavy machinery., key: 62de878a
+            label: Text
+            name: 62de878a
+            widget: text
+          - hint: >-
+              Original text: We pride ourselves in delivering exceptional
+              service for value., key: 46a32461
+            label: Text
+            name: 46a32461
+            widget: string
+          - hint: 'Original text: Learn more, key: -52aefc2f'
+            label: Text
+            name: '-52aefc2f'
+            widget: string
+          - hint: 'Original text: Contacts, key: -1df83b8d'
+            label: Text
+            name: '-1df83b8d'
+            widget: string
+          - hint: 'Original text: Email Us, key: 3137a5e2'
+            label: Text
+            name: 3137a5e2
+            widget: string
+          - hint: 'Original text: Facebook, key: 217bfee6'
+            label: Text
+            name: 217bfee6
+            widget: string
+          - hint: 'Original text: 25B Norman Spencer Drive, key: 4b4aa0be'
+            label: Text
+            name: 4b4aa0be
+            widget: string
+          - hint: 'Original text: Papatoetoe, key: -31207dfe'
+            label: Text
+            name: '-31207dfe'
+            widget: string
+          - hint: 'Original text: Auckland 2104, key: 1335f55c'
+            label: Text
+            name: 1335f55c
+            widget: string
+          - hint: 'Original text: Connect, key: -6412ef36'
+            label: Text
+            name: '-6412ef36'
+            widget: string
+          - hint: 'Original text: Information, key: -273fe2f4'
+            label: Text
+            name: '-273fe2f4'
+            widget: string
+          - hint: 'Original text: Privacy Policy, key: -3fbde6f6'
+            label: Text
+            name: '-3fbde6f6'
+            widget: string
+          - hint: 'Original text: Terms of Use, key: 38622077'
+            label: Text
+            name: '38622077'
+            widget: string
+          - hint: 'Original text: First Name:, key: -33504ea1'
+            label: Text
+            name: '-33504ea1'
+            widget: string
+          - hint: 'Original text: Last Name:, key: -6eb65efb'
+            label: Text
+            name: '-6eb65efb'
+            widget: string
+          - hint: 'Original text: Email Address:, key: -429208f6'
+            label: Text
+            name: '-429208f6'
+            widget: string
+          - hint: >-
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
+            label: Text
+            name: 5a0ea5a1
+            widget: string
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form., key: -7c112e99
+            label: Text
+            name: '-7c112e99'
+            widget: string
+          - hint: 'Original text: Copyright 2014 - 2023,, key: f97ecf4'
+            label: Text
+            name: f97ecf4
+            widget: string
+          - hint: 'Original text: The Truck Cleaning Company, key: 6af0aac6'
+            label: Text
+            name: 6af0aac6
+            widget: string
+          - hint: |-
+              Original text: .
+                    , key: -c1e9364
+            label: Text
+            name: '-c1e9364'
+            widget: string
+          - hint: 'Original text: All Rights Reserved., key: 505d93bc'
+            label: Text
+            name: 505d93bc
+            widget: string
+          - hint: 'Original text: Website by , key: -1af4327c'
+            label: Text
+            name: '-1af4327c'
+            widget: string
+          - hint: 'Original text: Sygnal, key: -6b842d28'
+            label: Text
+            name: '-6b842d28'
+            widget: string
+          - hint: "Original text: .\_, key: 632"
+            label: Text
+            name: '632'
+            widget: string
+          - hint: "Original text: Contactless Cleaning during\_, key: f7e521f"
+            label: Text
+            name: f7e521f
+            widget: string
+          - hint: 'Original text: COVID-19 Level 3, key: 7f72b47'
+            label: Text
+            name: 7f72b47
+            widget: string
+          - hint: "Original text: \_-\_, key: 25eb3"
+            label: Text
+            name: 25eb3
+            widget: string
+          - hint: 'Original text: Click to learn more., key: b119e30'
+            label: Text
+            name: b119e30
+            widget: string
+          - hint: 'Original text: Call Now, key: -687c1ec'
+            label: Text
+            name: '-687c1ec'
+            widget: string
+          - hint: 'Original text: Client Testimonials, key: -4febd617'
+            label: Text
+            name: '-4febd617'
+            widget: string
+          - hint: 'Original text: What our clients think..., key: 33eced64'
+            label: Text
+            name: 33eced64
+            widget: string
+          - hint: >-
+              Original text: Here's what our clients love about The Car Cleaning
+              Company, key: de60d6e
+            label: Text
+            name: de60d6e
+            widget: string
+          - hint: >-
+              Original text: ( click on any testimonial to read the full text ),
+              key: -174f21f3
+            label: Text
+            name: '-174f21f3'
+            widget: string
+          - hint: 'Original text: Special Services, key: 4b931825'
+            label: Text
+            name: 4b931825
+            widget: string
+          - hint: >-
+              Original text: We offer a full range of specialised services.,
+              key: 5b921ae8
+            label: Text
+            name: 5b921ae8
+            widget: string
+          - hint: 'Original text: SPECIAL DETAILING SERVICES, key: -5e5cfb4c'
+            label: Text
+            name: '-5e5cfb4c'
+            widget: string
+          - hint: 'Original text: Paint Overspray Removal, key: -67160c7d'
+            label: Text
+            name: '-67160c7d'
+            widget: string
+          - hint: >-
+              Original text: , including Acrylic, Water-based, Enamel, Rust
+              kill, Teflon, and Bodywax (imported new vehicles), key: 5bd9d438
+            label: Text
+            name: 5bd9d438
+            widget: text
+          - hint: 'Original text: Roadworks Overspray Removal, key: -214b5d79'
+            label: Text
+            name: '-214b5d79'
+            widget: string
+          - hint: >-
+              Original text: , including Tar, Bitumen, Emulsion, Lime, and
+              Concrete., key: 2696f0f7
+            label: Text
+            name: 2696f0f7
+            widget: string
+          - hint: 'Original text: Construction Overspray Removal, key: 5ceba976'
+            label: Text
+            name: 5ceba976
+            widget: string
+          - hint: >-
+              Original text: , including wet concrete, dry concrete, welding
+              fallout, iron filings, plaster spray, grease, oil, key: 2715e7fa
+            label: Text
+            name: 2715e7fa
+            widget: text
+          - hint: 'Original text: Decal & Signwriting Removal, key: 2a8d21be'
+            label: Text
+            name: 2a8d21be
+            widget: string
+          - hint: >-
+              Original text: , including glue removal, decals removal, sign
+              writing removal, sticker removal, window tints removal, key:
+              4394d92e
+            label: Text
+            name: 4394d92e
+            widget: text
+          - hint: 'Original text: Graffiti Removal, key: 74c82094'
+            label: Text
+            name: 74c82094
+            widget: string
+          - hint: 'Original text: Damage Repair, key: c292d5e'
+            label: Text
+            name: c292d5e
+            widget: string
+          - hint: >-
+              Original text: , including light scratches, bumper scuffs,
+              shopping trolley marks, car wash scratches (car washes using
+              brushes), graffiti, finger printing dust (stolen vehicles), key:
+              3b8a0e2d
+            label: Text
+            name: 3b8a0e2d
+            widget: text
+          - hint: 'Original text: Water / Flood Damage, key: 4c0c10ab'
+            label: Text
+            name: 4c0c10ab
+            widget: string
+          - hint: >-
+              Original text: , includes full carpet removal, cleaning, and
+              re-installation., key: fb4344b
+            label: Text
+            name: fb4344b
+            widget: string
+          - hint: 'Original text: Mould Removal, key: -45e143a9'
+            label: Text
+            name: '-45e143a9'
+            widget: string
+          - hint: >-
+              Original text: , includes full shampoo and treatment to kill mould
+              spores., key: 56c92efc
+            label: Text
+            name: 56c92efc
+            widget: string
+          - hint: 'Original text: CLEANING FOR REGULATED VEHICLE USE, key: -6c11814e'
+            label: Text
+            name: '-6c11814e'
+            widget: string
+          - hint: 'Original text: Food Grade Sanitising, key: 6802e7d8'
+            label: Text
+            name: 6802e7d8
+            widget: string
+          - hint: 'Original text: Healthcare Vehicle Sanitising., key: -452f7ec6'
+            label: Text
+            name: '-452f7ec6'
+            widget: string
+          - hint: "Original text: \_ Humans have accidents, we sort it out., key: -5ede4995"
+            label: Text
+            name: '-5ede4995'
+            widget: string
+          - hint: 'Original text: Learn more about our services., key: -30e18666'
+            label: Text
+            name: '-30e18666'
+            widget: string
+          - hint: >-
+              Original text: MANAGED SITES & PROGRAMME MAINTENANCE, key:
+              1a1e6840
+            label: Text
+            name: 1a1e6840
+            widget: string
+          - hint: "Original text: We do more than vehicles!\_ We also offers managed site services & programme maintenance for your office, building, petrol station, or other commercial property., key: -65456cc2"
+            label: Text
+            name: '-65456cc2'
+            widget: text
+          - hint: >-
+              Original text: We wash buildings, scrub pavement, offer water
+              blasting, and sort out your rubbish., key: 5dd17d47
+            label: Text
+            name: 5dd17d47
+            widget: string
+          - hint: 'Original text: Car Flooded?, key: 3bd0a1ce'
+            label: Text
+            name: 3bd0a1ce
+            widget: string
+          - hint: 'Original text: No worries! , key: -420fce61'
+            label: Text
+            name: '-420fce61'
+            widget: string
+          - hint: >-
+              Original text: We'll make it just like new. Check out our full
+              flood-cleaning service., key: -41f14d0f
+            label: Text
+            name: '-41f14d0f'
+            widget: string
+          - hint: 'Original text: Can we clean it? Yes we can., key: 39a07532'
+            label: Text
+            name: 39a07532
+            widget: string
+          - hint: 'Original text: Learn More, key: -52bd880f'
+            label: Text
+            name: '-52bd880f'
+            widget: string
+          - hint: >-
+              Original text: Information We Collect and How We Use It, key:
+              1a4297e9
+            label: Text
+            name: 1a4297e9
+            widget: string
+          - hint: >-
+              Original text: We offer a number of services that do not require
+              you to register for an account or provide any personal information
+              to us. In order to provide our full range of services, we may
+              collect the following types of information:, key: a872afb
+            label: Text
+            name: a872afb
+            widget: text
+          - hint: 'Original text: Information you provide, key: -5237b974'
+            label: Text
+            name: '-5237b974'
+            widget: string
+          - hint: >-
+              Original text: When you sign up for an Account or other service or
+              promotion that requires registration, we ask you for personal
+              information (such as your name, email address and an account
+              password). For certain services, we may also request credit card
+              or other payment account information which we maintain in
+              encrypted form on secure servers. We may combine the information
+              you submit under your account with information from other services
+              or third parties in order to provide you with a better experience
+              and to improve the quality of our services. For certain services,
+              we may give you the opportunity to opt out of combining such
+              information., key: -21550a2b
+            label: Text
+            name: '-21550a2b'
+            widget: text
+          - hint: 'Original text: Cookies, key: -64062591'
+            label: Text
+            name: '-64062591'
+            widget: string
+          - hint: >-
+              Original text: When you visit our site, we send one or more
+              cookies – a small file containing a string of characters – to your
+              computer or other device that uniquely identifies your browser. We
+              use cookies to improve the quality of our service, including for
+              storing user preferences and tracking user trends. We may set one
+              or more cookies in your browser when you visit a website., key:
+              322e49ec
+            label: Text
+            name: 322e49ec
+            widget: text
+          - hint: 'Original text: Log information, key: -16f49d0'
+            label: Text
+            name: '-16f49d0'
+            widget: string
+          - hint: >-
+              Original text: When you access our services, our servers
+              automatically record information that your browser sends whenever
+              you visit a website. These server logs may include information
+              such as your web request, Internet Protocol address, browser type,
+              browser language, the date and time of your request and one or
+              more cookies that may uniquely identify your browser., key:
+              -d41bd1b
+            label: Text
+            name: '-d41bd1b'
+            widget: text
+          - hint: 'Original text: User communications, key: -606f1fce'
+            label: Text
+            name: '-606f1fce'
+            widget: string
+          - hint: >-
+              Original text: When you send email or other communications to us,
+              we may retain those communications in order to process your
+              inquiries, respond to your requests and improve our services.,
+              key: -5b55573
+            label: Text
+            name: '-5b55573'
+            widget: text
+          - hint: 'Original text: Affiliated Services on other sites, key: -46b1fc2c'
+            label: Text
+            name: '-46b1fc2c'
+            widget: string
+          - hint: >-
+              Original text: We offer some of our services on or through other
+              web sites. Personal information that you provide to those sites
+              may be sent to us in order to deliver the service. We process such
+              information under this Privacy Policy. The affiliated sites
+              through which our services are offered may have different privacy
+              practices and we encourage you to read their privacy policies.,
+              key: 6987f0ce
+            label: Text
+            name: 6987f0ce
+            widget: text
+          - hint: 'Original text: Links, key: 4605f99'
+            label: Text
+            name: 4605f99
+            widget: string
+          - hint: >-
+              Original text: We may present links in a format that enables us to
+              keep track of whether these links have been followed. We use this
+              information to improve the quality and organization of our
+              content., key: 13fa9d6
+            label: Text
+            name: 13fa9d6
+            widget: text
+          - hint: >-
+              Original text: We only process personal information for the
+              purposes described in this Privacy Policy and/or the supplementary
+              privacy notices for specific services. In addition to the above,
+              such purposes include:, key: 53ad6bd3
+            label: Text
+            name: 53ad6bd3
+            widget: text
+          - hint: >-
+              Original text: Providing our services, including the display of
+              customized content and advertising;, key: 78ccd54d
+            label: Text
+            name: 78ccd54d
+            widget: string
+          - hint: >-
+              Original text: Auditing, research and analysis in order to
+              maintain, protect and improve our services;, key: -44d874a1
+            label: Text
+            name: '-44d874a1'
+            widget: string
+          - hint: >-
+              Original text: Ensuring the technical functioning of our network;,
+              key: 3fa943bd
+            label: Text
+            name: 3fa943bd
+            widget: string
+          - hint: >-
+              Original text: Protecting our rights or property, or that of our
+              users; and, key: -6ffca653
+            label: Text
+            name: '-6ffca653'
+            widget: string
+          - hint: 'Original text: Developing new services., key: -4c665b4b'
+            label: Text
+            name: '-4c665b4b'
+            widget: string
+          - hint: 'Original text: VISIT OUR FULL WEBSITE, key: 3c884eb3'
+            label: Text
+            name: 3c884eb3
+            widget: string
+          - hint: 'Original text: We Clean, key: 66d97a77'
+            label: Text
+            name: 66d97a77
+            widget: string
+          - hint: 'Original text: Click , key: 7877d7b8'
+            label: Text
+            name: 7877d7b8
+            widget: string
+          - hint: 'Original text: any vehicle category to learn more., key: -5f94bb4e'
+            label: Text
+            name: '-5f94bb4e'
+            widget: string
+          - hint: >-
+              Original text: Full valet service, at your home or office, at a
+              time that works best for you., key: 789b6526
+            label: Text
+            name: 789b6526
+            widget: string
+          - hint: >-
+              Original text: The only mobile truck was in New Zealand!, key:
+              -14085076
+            label: Text
+            name: '-14085076'
+            widget: string
+          - hint: >-
+              Original text: Full sanitization, and special cleaning services.,
+              key: -6f636e9
+            label: Text
+            name: '-6f636e9'
+            widget: string
+          - hint: >-
+              Original text: We also have a special division dedicated to
+              cleaning boats and airplanes., key: 46145892
+            label: Text
+            name: '46145892'
+            widget: string
+          - hint: 'Original text: Whoops! 404, key: 16b4e2e5'
+            label: Text
+            name: 16b4e2e5
+            widget: string
+          - hint: 'Original text: Page not found, key: 49a057c4'
+            label: Text
+            name: 49a057c4
+            widget: string
+          - hint: 'Original text: This page may have been moved., key: -267378ff'
+            label: Text
+            name: '-267378ff'
+            widget: string
+          - hint: 'Original text: Visit home page, key: -64032785'
+            label: Text
+            name: '-64032785'
+            widget: string
+          - hint: 'Original text: See all of our client testimonials, key: -33c8e0c8'
+            label: Text
+            name: '-33c8e0c8'
+            widget: string
+          - hint: "Original text: \_ Humans have accidents, we sort it out. , key: -7ceae8eb"
+            label: Text
+            name: '-7ceae8eb'
+            widget: string
+          - hint: 'Original text: Learn more about our services, key: 27b6a914'
+            label: Text
+            name: 27b6a914
+            widget: string
+          - hint: "Original text: We do more than vehicles!\_ We also offer managed site services & programme maintenance for your office, building, petrol station, or other commercial property., key: 3ad8ae2d"
+            label: Text
+            name: 3ad8ae2d
+            widget: text
+          - hint: 'Original text: ABOUT OUR SERVICES, key: 2c8adca5'
+            label: Text
+            name: 2c8adca5
+            widget: string
+          - hint: >-
+              Original text: Our top priority is to provide our customers with a
+              world-class service. All of our staff have extensive training and
+              experience, to ensure the highest quality of service delivery.,
+              key: -21452884
+            label: Text
+            name: '-21452884'
+            widget: text
+          - hint: 'Original text: Here is how we are different-, key: 3436d3bc'
+            label: Text
+            name: 3436d3bc
+            widget: string
+          - hint: 'Original text: We are entirely mobile, key: -71ea4bda'
+            label: Text
+            name: '-71ea4bda'
+            widget: string
+          - hint: "Original text: . \_All of our services are mobile so that we can clean your vehicles at the location most convenient for you. \_For corporate car fleets, and commercial truck fleets, this means minimum downtime for your drivers, and no wasted wages. \_For personal vehicles, it means unmatched convenience, and the ability have your car cleaned easily at your home or work. , key: 259b8764"
+            label: Text
+            name: 259b8764
+            widget: text
+          - hint: 'Original text: Our hours are flexible, key: -1e7af504'
+            label: Text
+            name: '-1e7af504'
+            widget: string
+          - hint: "Original text: . \_We can come to you at any time of the day or night, on weekdays or weekends., key: -6b9823ec"
+            label: Text
+            name: '-6b9823ec'
+            widget: string
+          - hint: 'Original text: Regular servicing options, key: -1f1490f4'
+            label: Text
+            name: '-1f1490f4'
+            widget: string
+          - hint: "Original text: . \_If you desire, we can provide regularly scheduled washing to ensure that your vehicles and corporate fleet present the best representation of you and your company., key: 76d47fe0"
+            label: Text
+            name: 76d47fe0
+            widget: text
+          - hint: 'Original text: Full service valet, key: 1940bab4'
+            label: Text
+            name: 1940bab4
+            widget: string
+          - hint: "Original text: . \_Our valet services include a full interior and exterior clean; carpet wash and upholstery shampoo; alloy and chrome polishing; dressage of all vinyl surface; and hoodlining. After that kind of detailing, pride in your fleet is just a give-in., key: 3aba3dbe"
+            label: Text
+            name: 3aba3dbe
+            widget: text
+          - hint: 'Original text: Specialized sanitisation services, key: 4ae504a7'
+            label: Text
+            name: 4ae504a7
+            widget: string
+          - hint: "Original text: . \_We provide specialised cleaning for food grade vehicles such as milk trucks., key: 5f490a55"
+            label: Text
+            name: 5f490a55
+            widget: string
+          - hint: 'Original text: Environmentally friendly, key: 28e90dc0'
+            label: Text
+            name: 28e90dc0
+            widget: string
+          - hint: "Original text: . \_Protecting New Zealand's environment is important to us. That is why we bring everything we need from power to water and shelter; PLUS take everything away again, including the water! (We are proud to be one of the few approved waste water removal approved operators nationally.), key: 22f9562"
+            label: Text
+            name: 22f9562
+            widget: text
+          - hint: 'Original text: Flexible pricing for fleets, key: 49802f0b'
+            label: Text
+            name: 49802f0b
+            widget: string
+          - hint: "Original text: . \_All pricing is negotiable based on the frequency of washes for the number of vehicles provided., key: -6e173808"
+            label: Text
+            name: '-6e173808'
+            widget: text
+          - hint: 'Original text: ‍, key: 200d'
+            label: Text
+            name: 200d
+            widget: string
+          - hint: 'Original text: Protected page, key: -11c6301f'
+            label: Text
+            name: '-11c6301f'
+            widget: string
+          - hint: >-
+              Original text: Incorrect password. Please try again., key:
+              -f5c4b5f
+            label: Text
+            name: '-f5c4b5f'
+            widget: string
+          - hint: 'Original text: We come to you!, key: 3571e53d'
+            label: Text
+            name: 3571e53d
+            widget: string
+          - hint: >-
+              Original text: The Car Cleaning Company covers the entire Auckland
+              region with our fleet of specialised vans., key: 42ce499
+            label: Text
+            name: 42ce499
+            widget: text
+          - hint: >-
+              Original text: We provide both personal residential cleans at your
+              home or office, and we do full commercial fleets as well. , key:
+              1f8c9758
+            label: Text
+            name: 1f8c9758
+            widget: text
+          - hint: >-
+              Original text: Call us anytime for a free quote. Our pricing is
+              based on the size of your fleet, and the frequency of washing you
+              require., key: 31c91803
+            label: Text
+            name: 31c91803
+            widget: text
+          - hint: 'Original text: info@carcleaning.nz, key: 52f6285f'
+            label: Text
+            name: 52f6285f
+            widget: string
+          - hint: 'Original text: freephone 0800 447 666, key: -729ea5ad'
+            label: Text
+            name: '-729ea5ad'
+            widget: string
+          - hint: |-
+              Original text: phone 09 527 7730
+                        , key: -15bd865e
+            label: Text
+            name: '-15bd865e'
+            widget: string
+          - hint: 'Original text: Office Hours: , key: 76980911'
+            label: Text
+            name: '76980911'
+            widget: string
+          - hint: 'Original text: Monday to Friday, key: 2f6b5fd4'
+            label: Text
+            name: 2f6b5fd4
+            widget: string
+          - hint: 'Original text: 8:30am - 4:30pm, key: -47b70d8'
+            label: Text
+            name: '-47b70d8'
+            widget: string
+          - hint: 'Original text: How can we Help?, key: 7d5ca56c'
+            label: Text
+            name: 7d5ca56c
+            widget: string
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form :(, key: 437fe647
+            label: Text
+            name: 437fe647
+            widget: string
+          - hint: 'Original text: About us, key: 645f0031'
+            label: Text
+            name: 645f0031
+            widget: string
+          - hint: "Original text: The Truck Cleaning Company provides a full range of professional cleaning services for your\_private vehicles\_and\_corporate fleets., key: -6181698d"
+            label: Text
+            name: '-6181698d'
+            widget: text
+          - hint: 'Original text: ABOUT US, key: -70d4fbcf'
+            label: Text
+            name: '-70d4fbcf'
+            widget: string
+          - hint: 'Original text: We come to you, key: -2790f89c'
+            label: Text
+            name: '-2790f89c'
+            widget: string
+          - hint: "Original text: \_and wash your vehicles on-site, with, key: 1c853fab"
+            label: Text
+            name: 1c853fab
+            widget: string
+          - hint: "Original text: the full valet experience - there’s no need to waste time and money sending your workers out. Simply tell us when you want us there and we’ll come to you for total convenience.\_, key: -1812f63d"
+            label: Text
+            name: '-1812f63d'
+            widget: text
+          - hint: >-
+              Original text: Every member of our staff has extensive training
+              and experience, and we pride ourselves on being able to provide
+              the best quality service. We’ll do whatever it takes to ensure
+              that you’re thrilled with the service our team provides., key:
+              -611dffdb
+            label: Text
+            name: '-611dffdb'
+            widget: text
+          - hint: 'Original text: WE COME TO YOU!, key: -7e3fda83'
+            label: Text
+            name: '-7e3fda83'
+            widget: string
+          - hint: 'Original text: We have four specialised divisions-, key: 29ac4359'
+            label: Text
+            name: 29ac4359
+            widget: string
+          - hint: 'Original text: The Car Cleaning Company, key: -5535f84f'
+            label: Text
+            name: '-5535f84f'
+            widget: string
+          - hint: >-
+              Original text: The Heavy Transport Cleaning Company, key:
+              -6ae05a6b
+            label: Text
+            name: '-6ae05a6b'
+            widget: string
+          - hint: 'Original text: The Boat Cleaning Company, key: -60986b79'
+            label: Text
+            name: '-60986b79'
+            widget: string
+          - hint: 'Original text: PERSONAL VALET & GROOMING SERVICES, key: -62374a6c'
+            label: Text
+            name: '-62374a6c'
+            widget: string
+          - hint: "Original text: We can wash your personal vehicles at your home, or work, whether or not you are available to be there.\_ Simply schedule with us, key: -554eaaf4"
+            label: Text
+            name: '-554eaaf4'
+            widget: text
+          - hint: >-
+              Original text: We also offer a full range of services for personal
+              trucks, boats, farming equipment, and more., key: 104b6e3b
+            label: Text
+            name: 104b6e3b
+            widget: text
+          - hint: 'Original text: CORPORATE FLEET GROOMING, key: 67996ecd'
+            label: Text
+            name: 67996ecd
+            widget: string
+          - hint: "Original text: Our expert team is well prepared to handle your fleet of corporate cars, taxis, or commercial trucks.\_ We work around your schedule, and we perform all cleaning at the location of your choosing., key: 3c06f19c"
+            label: Text
+            name: 3c06f19c
+            widget: text
+          - hint: 'Original text: THE TRUCK CLEANING COMPANY, key: 7157d6a6'
+            label: Text
+            name: 7157d6a6
+            widget: string
+          - hint: >-
+              Original text: Our reputation is built on providing the best
+              service and valet clean for truck fleets. We’re New Zealand’s only
+              mobile cleaning service for trucks, and all of our products are
+              environmentally friendly., key: -472f6dec
+            label: Text
+            name: '-472f6dec'
+            widget: text
+          - hint: "Original text: We give your trucks the full valet experience from wherever you are - there’s no need to waste time and money sending your workers out. Simply tell us when you want us there and we’ll come to you for total convenience. \_, key: 5b2e3674"
+            label: Text
+            name: 5b2e3674
+            widget: text
+          - hint: 'Original text: HEAVY TRANSPORT GROOMING, key: 4ef36e30'
+            label: Text
+            name: 4ef36e30
+            widget: string
+          - hint: "Original text: We have specialised equipment for cleaning the heaviest of vehicles, including aircraft, boats, and trains.\_ We even do farming and mining equipment, to a very high degree of quality., key: -6387f960"
+            label: Text
+            name: '-6387f960'
+            widget: text
+          - hint: 'Original text: Why People Choose Us, key: -4776f972'
+            label: Text
+            name: '-4776f972'
+            widget: string
+          - hint: 'Original text: Convenience, key: 1b66e1d7'
+            label: Text
+            name: 1b66e1d7
+            widget: string
+          - hint: "Original text: \_– Our fully mobile valet and services make keeping your personal vehicles and corporate fleets in tip top shape., key: -724b9cc"
+            label: Text
+            name: '-724b9cc'
+            widget: text
+          - hint: 'Original text: Quality, key: -75f6a721'
+            label: Text
+            name: '-75f6a721'
+            widget: string
+          - hint: "Original text: \_– We wash by hand to ensure that every last millimetre gets thoroughly cleaned. Anything less isn’t good enough for you, and wouldn’t be good enough for us either., key: -d0d2c4d"
+            label: Text
+            name: '-d0d2c4d'
+            widget: text
+          - hint: 'Original text: Innovation, key: -4028fe7b'
+            label: Text
+            name: '-4028fe7b'
+            widget: string
+          - hint: "Original text: \_- We keep up to date with all the latest technology, products and techniques so that we can get the job done much more efficiently and thoroughly than anyone else., key: 9d0bfc0"
+            label: Text
+            name: 9d0bfc0
+            widget: text
+          - hint: 'Original text: Experience, key: 71b8358a'
+            label: Text
+            name: 71b8358a
+            widget: string
+          - hint: "Original text: \_- All of our employees are fully trained in every aspect of transportation cleaning and come with years of experience., key: -49c55c01"
+            label: Text
+            name: '-49c55c01'
+            widget: text
+          - hint: 'Original text: Flexibility, key: 55b4fcf9'
+            label: Text
+            name: 55b4fcf9
+            widget: string
+          - hint: "Original text: \_- Our scheduling is flexible. We come to you, and work around your personal and corporate schedules., key: -44799364"
+            label: Text
+            name: '-44799364'
+            widget: text
+          - hint: 'Original text: Responsibility, key: -495de5d2'
+            label: Text
+            name: '-495de5d2'
+            widget: string
+          - hint: "Original text: \_- Our company meets all of New Zealand's wastewater disposal regulations., key: -1e9e2f50"
+            label: Text
+            name: '-1e9e2f50'
+            widget: string
+          - hint: 'Original text: Friendly service!, key: 188cd7c1'
+            label: Text
+            name: 188cd7c1
+            widget: string
+          - hint: 'Original text: Can we clean it? , key: -44ae263b'
+            label: Text
+            name: '-44ae263b'
+            widget: string
+          - hint: 'Original text: Yes we can., key: afac17'
+            label: Text
+            name: afac17
+            widget: string
+          - hint: >-
+              Original text: YES! We are currently hiring for this role, key:
+              45138264
+            label: Text
+            name: '45138264'
+            widget: string
+          - hint: 'Original text: Email us your CV now, key: -4f18c728'
+            label: Text
+            name: '-4f18c728'
+            widget: string
+          - hint: |-
+              Original text:  if you would like to apply.
+                          , key: d630df
+            label: Text
+            name: d630df
+            widget: string
+          - hint: 'Original text: JOB DETAILS, key: 2a344c9f'
+            label: Text
+            name: 2a344c9f
+            widget: string
+          - hint: 'Original text: Search results, key: 7e85e19e'
+            label: Text
+            name: 7e85e19e
+            widget: string
+          - hint: 'Original text: Search, key: -6ca0ae38'
+            label: Text
+            name: '-6ca0ae38'
+            widget: string
+          - hint: 'Original text: No matching results., key: -75764c4'
+            label: Text
+            name: '-75764c4'
+            widget: string
+          - hint: 'Original text: Corporate fleet car valet, key: 1c620617'
+            label: Text
+            name: 1c620617
+            widget: string
+          - hint: >-
+              Original text: Full corporate fleet valet, when & where you need
+              us., key: -3fac26e6
+            label: Text
+            name: '-3fac26e6'
+            widget: string
+          - hint: >-
+              Original text: ASG's fleet of professional cleaners is available
+              to manage all of your car fleet cleaning needs. , key: -6992da36
+            label: Text
+            name: '-6992da36'
+            widget: text
+          - hint: 'Original text: No matter what industry you''re in, , key: 35b49498'
+            label: Text
+            name: 35b49498
+            widget: string
+          - hint: 'Original text: Executive cars, key: -33eda389'
+            label: Text
+            name: '-33eda389'
+            widget: string
+          - hint: 'Original text: Healthcare, key: -530b3473'
+            label: Text
+            name: '-530b3473'
+            widget: string
+          - hint: 'Original text: Delivery, key: 34ef8014'
+            label: Text
+            name: 34ef8014
+            widget: string
+          - hint: 'Original text: Taxis, key: 4cd9df5'
+            label: Text
+            name: 4cd9df5
+            widget: string
+          - hint: 'Original text: Hospitality, key: 5755e014'
+            label: Text
+            name: '5755e014'
+            widget: string
+          - hint: >-
+              Original text: Contact us to discuss your needs and we'll organise
+              a proposal for you. , key: -17a2e9dc
+            label: Text
+            name: '-17a2e9dc'
+            widget: string
+          - hint: 'Original text: 13D Andromeda Crescent, key: 6a26451a'
+            label: Text
+            name: 6a26451a
+            widget: string
+          - hint: 'Original text: East Tamaki, key: -7019589e'
+            label: Text
+            name: '-7019589e'
+            widget: string
+          - hint: 'Original text: Auckland 2013, key: 1335f1b9'
+            label: Text
+            name: 1335f1b9
+            widget: string
+          - hint: 'Original text: bookings@tccc.co.nz, key: -3de9144b'
+            label: Text
+            name: '-3de9144b'
+            widget: string
+          - hint: 'Original text: phone (09) 527 7730, key: 26bf5639'
+            label: Text
+            name: 26bf5639
+            widget: string
+          - hint: 'Original text: freephone (0800) 447 666, key: -3f84203c'
+            label: Text
+            name: '-3f84203c'
+            widget: string
+          - hint: 'Original text: Mon-Fri 8:00am - 5:00pm, key: 5375da3'
+            label: Text
+            name: 5375da3
+            widget: string
+          - hint: >-
+              Original text: Welcome to our website. If you continue to browse
+              and use this website you are agreeing to comply with and be bound
+              by the following terms and conditions of use, which together with
+              our privacy policy govern our relationship with you in relation to
+              this website., key: -75952c2
+            label: Text
+            name: '-75952c2'
+            widget: text
+          - hint: >-
+              Original text: The use of this website is subject to the following
+              terms of use:, key: 22bfd6e4
+            label: Text
+            name: 22bfd6e4
+            widget: string
+          - hint: "Original text: The content of the pages of this website is for your general information and use only. It is subject to change without notice.\_, key: 68a90daa"
+            label: Text
+            name: 68a90daa
+            widget: text
+          - hint: "Original text: Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose.\_, key: -4bda0964"
+            label: Text
+            name: '-4bda0964'
+            widget: text
+          - hint: "Original text: You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.\_, key: -39a4900"
+            label: Text
+            name: '-39a4900'
+            widget: text
+          - hint: "Original text: Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services or information available through this website meet your specific requirements.\_, key: -69445223"
+            label: Text
+            name: '-69445223'
+            widget: text
+          - hint: "Original text: This website contains material which is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance and graphics. Reproduction is prohibited other than in accordance with the copyright notice, which forms part of these terms and conditions.\_, key: -56f305e6"
+            label: Text
+            name: '-56f305e6'
+            widget: text
+          - hint: "Original text: All trade marks reproduced in this website which are not the property of, or licensed to, the operator are acknowledged on the website.\_, key: -2dedb8ea"
+            label: Text
+            name: '-2dedb8ea'
+            widget: text
+          - hint: "Original text: Unauthorised use of this website may give rise to a claim for damages and/or be a criminal offence.\_, key: -43b3926c"
+            label: Text
+            name: '-43b3926c'
+            widget: text
+          - hint: "Original text: From time to time this website may also include links to other websites. These links are provided for your convenience to provide further information. They do not signify that we endorse the website(s). We have no responsibility for the content of the linked website(s).\_, key: -476c2550"
+            label: Text
+            name: '-476c2550'
+            widget: text
+          - hint: >-
+              Original text: Your use of this website and any dispute arising
+              out of such use of the website is subject to the laws of New
+              Zealand., key: -58729b83
+            label: Text
+            name: '-58729b83'
+            widget: text
+          - hint: >-
+              Original text: COVID-19 & FLU MEDICAL-GRADE SANITISE, key:
+              -6ca69ef0
+            label: Text
+            name: '-6ca69ef0'
+            widget: string
+          - hint: >-
+              Original text: We offer full Medical-Grade Sanitisation for , key:
+              3e295277
+            label: Text
+            name: '3e295277'
+            widget: string
+          - hint: 'Original text: COVID-19, key: 19e018f0'
+            label: Text
+            name: 19e018f0
+            widget: string
+          - hint: >-
+              Original text: , for your buildings, homes, and vehicles, key:
+              -52b9bc39
+            label: Text
+            name: '-52b9bc39'
+            widget: string
+          - hint: >-
+              Original text: The pandemic is past, but COVID is still a problem
+              in many communities. We're still cracking down hard with our
+              medical-grade disinfectant., key: -5f7f31b9
+            label: Text
+            name: '-5f7f31b9'
+            widget: text
+          - hint: >-
+              Original text: Need to sanitise your building or vehicle? We can
+              clean anything..., key: 7c4d7b17
+            label: Text
+            name: 7c4d7b17
+            widget: string
+          - hint: 'Original text: Homes, key: 42ab754'
+            label: Text
+            name: 42ab754
+            widget: string
+          - hint: 'Original text: Cars, Trucks, Buses and more, key: -7183b3f5'
+            label: Text
+            name: '-7183b3f5'
+            widget: string
+          - hint: 'Original text: Restaurants & Cafes, key: -61390b8e'
+            label: Text
+            name: '-61390b8e'
+            widget: string
+          - hint: 'Original text: Office buildings, key: 292faffb'
+            label: Text
+            name: 292faffb
+            widget: string
+          - hint: 'Original text: Schools, key: -2a7d54a1'
+            label: Text
+            name: '-2a7d54a1'
+            widget: string
+          - hint: 'Original text: Gyms, key: 221a38'
+            label: Text
+            name: 221a38
+            widget: string
+          - hint: 'Original text: and more., key: -48924010'
+            label: Text
+            name: '-48924010'
+            widget: string
+          - hint: >-
+              Original text: We'll handle all aspects, including all hard
+              surfaces- where COVID-19 likes to live for extended periods. We
+              also clean drapes and carpets, and more., key: -1cbe4cf5
+            label: Text
+            name: '-1cbe4cf5'
+            widget: text
+          - hint: 'Original text: Contact us for details., key: 56f665c5'
+            label: Text
+            name: 56f665c5
+            widget: string
+          - hint: 'Original text: We have three specialised divisions-, key: 739212ad'
+            label: Text
+            name: 739212ad
+            widget: string
+          - hint: >-
+              Original text: Our reputation is built on providing the best
+              service and valet clean for truck fleets. We’re New Zealand’s only
+              mobile cleaning service for trucks, all of our products are
+              environmentally friendly, and we provide food-grade sanitisation
+              for some of the biggest names in the industry., key: -3557ff13
+            label: Text
+            name: '-3557ff13'
+            widget: text
+          - hint: "Original text: We give your trucks the full valet experience from wherever you are - there’s no need to waste time and money sending your workers out. Simply tell us when you want us there and we’ll come to you for total convenience. \_Every member of our staff has extensive training and experience, and we pride ourselves on being able to provide the best quality service. We’ll do whatever it takes to ensure that you’re thrilled with the service our team provides., key: -46b32d67"
+            label: Text
+            name: '-46b32d67'
+            widget: text
+          - hint: "Original text: Call\_(09) 257 3172\_for a quote now., key: 336027e7"
+            label: Text
+            name: '336027e7'
+            widget: string
+          - hint: 'Original text: Careers, key: -7bc27f6b'
+            label: Text
+            name: '-7bc27f6b'
+            widget: string
+          - hint: 'Original text: Build a Fantastic Career with Us, key: 7f6114ac'
+            label: Text
+            name: 7f6114ac
+            widget: string
+          - hint: "Original text: We arealways looking for reliable people to join our mobile valet team.\_ , key: -e4fd4fa"
+            label: Text
+            name: '-e4fd4fa'
+            widget: string
+          - hint: >-
+              Original text: We offer a great working environment and the
+              opportunity to build a , key: 12f2998d
+            label: Text
+            name: 12f2998d
+            widget: string
+          - hint: 'Original text: professional career , key: 7c420b69'
+            label: Text
+            name: 7c420b69
+            widget: string
+          - hint: >-
+              Original text: as a transportation cleaning specialist., key:
+              -32b8ab03
+            label: Text
+            name: '-32b8ab03'
+            widget: string
+          - hint: >-
+              Original text: If you are interested in a career with ASG, please
+              email your CV and work experience to us, key: -799f6869
+            label: Text
+            name: '-799f6869'
+            widget: string
+          - hint: 'Original text: CURRENT JOB POSTINGS, key: -24642205'
+            label: Text
+            name: '-24642205'
+            widget: string
+          - hint: 'Original text: Click any posting for details., key: -438a02d3'
+            label: Text
+            name: '-438a02d3'
+            widget: string
+          - hint: 'Original text: >> Learn more, key: -155703cf'
+            label: Text
+            name: '-155703cf'
+            widget: string
+          - hint: >-
+              Original text: If you are interested in a career with us, please
+              email your CV and work experience to us at-, key: -4d10d830
+            label: Text
+            name: '-4d10d830'
+            widget: text
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: 'Original link: http://carcleaning.nz, key: -7356aee1'
+            label: Link
+            name: '-7356aee1'
+            widget: string
+          - hint: 'Original link: http://truckcleaning.nz, key: 7e9b8334'
+            label: Link
+            name: 7e9b8334
+            widget: string
+          - hint: 'Original link: http://transportcleaning.nz, key: efad2a'
+            label: Link
+            name: efad2a
+            widget: string
+          - hint: 'Original link: /, key: 2f'
+            label: Link
+            name: 2f
+            widget: string
+          - hint: 'Original link: /contact/, key: 16bdc13e'
+            label: Link
+            name: 16bdc13e
+            widget: string
+          - hint: 'Original link: https://www.transportcleaning.nz/, key: f930a11'
+            label: Link
+            name: f930a11
+            widget: string
+          - hint: 'Original link: https://www.truckcleaning.nz/, key: 78eabb47'
+            label: Link
+            name: 78eabb47
+            widget: string
+          - hint: 'Original link: https://www.carcleaning.nz/, key: -187dd244'
+            label: Link
+            name: '-187dd244'
+            widget: string
+          - hint: 'Original link: /about/, key: 61642f31'
+            label: Link
+            name: 61642f31
+            widget: string
+          - hint: 'Original link: /reviews/, key: 28fef0a3'
+            label: Link
+            name: 28fef0a3
+            widget: string
+          - hint: 'Original link: tel:0800447666, key: 6ac6cd26'
+            label: Link
+            name: 6ac6cd26
+            widget: string
+          - hint: 'Original link: tel:095277730, key: 7fa97eaf'
+            label: Link
+            name: 7fa97eaf
+            widget: string
+          - hint: >-
+              Original link:
+              mailto:info@carcleaning.nz?subject=Website%20enquiry, key:
+              6d4b21c2
+            label: Link
+            name: 6d4b21c2
+            widget: string
+          - hint: >-
+              Original link: https://www.facebook.com/CarCleaningNZ, key:
+              -737c0097
+            label: Link
+            name: '-737c0097'
+            widget: string
+          - hint: 'Original link: /privacy/, key: -c8c512a'
+            label: Link
+            name: '-c8c512a'
+            widget: string
+          - hint: 'Original link: /terms/, key: -7e043789'
+            label: Link
+            name: '-7e043789'
+            widget: string
+          - hint: 'Original link: http://sygnal.com/, key: -47c5d50e'
+            label: Link
+            name: '-47c5d50e'
+            widget: string
+          - hint: 'Original link: /covid-19/, key: 5577b210'
+            label: Link
+            name: 5577b210
+            widget: string
+          - hint: 'Original link: /service/flood-cleaning, key: 76234b71'
+            label: Link
+            name: 76234b71
+            widget: string
+          - hint: 'Original link: http://boatcleaning.nz, key: 31ebc94f'
+            label: Link
+            name: 31ebc94f
+            widget: string
+          - hint: >-
+              Original link: http://carcleaning.co.nz/services/healthcare, key:
+              -6c3217f6
+            label: Link
+            name: '-6c3217f6'
+            widget: string
+          - hint: 'Original link: http://carcleaning.co.nz/, key: 7403ed34'
+            label: Link
+            name: 7403ed34
+            widget: string
+          - hint: 'Original link: http://truckcleaning.co.nz/, key: -214af337'
+            label: Link
+            name: '-214af337'
+            widget: string
+          - hint: 'Original link: http://heavytransportcleaning.co.nz/, key: 2b6faaa2'
+            label: Link
+            name: 2b6faaa2
+            widget: string
+          - hint: 'Original link: mailto:info@carcleaning.nz, key: -3e0e70a9'
+            label: Link
+            name: '-3e0e70a9'
+            widget: string
+          - hint: >-
+              Original link:
+              mailto:careers@asglimited.co.nz?subject=Job%20Enquiry, key:
+              61b41cc5
+            label: Link
+            name: 61b41cc5
+            widget: string
+          - hint: >-
+              Original link: /service/healthcare-vehicle-cleaning, key:
+              -1ce9220f
+            label: Link
+            name: '-1ce9220f'
+            widget: string
+          - hint: 'Original link: http://truckcleaning.co.nz, key: 7289f826'
+            label: Link
+            name: 7289f826
+            widget: string
+          - hint: 'Original link: http://transportcleaning.co.nz, key: -d36fd90'
+            label: Link
+            name: '-d36fd90'
+            widget: string
+          - hint: 'Original link: mailto:careers@asglimited.co.nz, key: -74f2fae8'
+            label: Link
+            name: '-74f2fae8'
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: 1a65200a
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i6fd6501e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i61badc80
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: ib4a263c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: adf5b44
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i131c1194
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i199fce78
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 38773c33
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 59ada0b4
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i4cb2e300
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1c6fcb2c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 59915b6a
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i664f82d8
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4a1f7c3
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 11307b90
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i601c7e47
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3013fbdd
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 64ca41e7
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3022135e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i7171c16b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i5517bc4c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 599f8933
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i57b8b453
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 7f525b9b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i6ba9869d
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 33a4a41
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i781a1099
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 13c6cc19
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1d32b62b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '69289e93'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '19836249'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i2482c442
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3108275e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 30fa0fdd
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i47075204
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 30dde0db
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 30ebf85c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4fbec620
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 31163edf
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: f73aff3
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1c07753d
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i4f25fdf7
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4419da8d
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2a485a80'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 663a594c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '546e6866'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-6c221458'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7a29d782'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4ea400a1
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4d53c61c'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-6a23e74b'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 446d03c1
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1dc78723
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2b1beb3c'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-443bf8f1'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 648580ad
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+publish_mode: editorial_workflow
