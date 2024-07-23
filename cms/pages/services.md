@@ -4,21 +4,6 @@ permalink: '{{ page.fileSlug }}/index.html'
 layout: services.html
 slug: services
 tags: pages
-seo:
-  noindex: false
-  title: The Truck Cleaning Company | Specialised Cleaning Services
-  description: >-
-    We come to you! Sometimes your car needs that extra clean. We handle tar,
-    paint overspray, graffiti removal, vomit & blood cleaning, and more.
-  og:title: The Truck Cleaning Company | Specialised Cleaning Services
-  additional_tags: >-
-    <meta content="We come to you! Sometimes your car needs that extra clean. We
-    handle tar, paint overspray, graffiti removal, vomit &amp; blood cleaning,
-    and more." property="og:description"><meta content="We come to you!
-    Sometimes your car needs that extra clean. We handle tar, paint overspray,
-    graffiti removal, vomit &amp; blood cleaning, and more."
-    property="twitter:description"><meta property="og:type" content="website">
-  twitter:title: The Truck Cleaning Company | Specialised Cleaning Services
 ---
 
 
