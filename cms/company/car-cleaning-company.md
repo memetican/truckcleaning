@@ -1,5 +1,5 @@
 ---
-f_url: http://carcleaning.nz
+f_url: https://www.carcleaning.nz/
 f_brief: Full valet service, at your home or office, at a time that works best for you.
 title: The Car Cleaning Company
 slug: car-cleaning-company
@@ -7,17 +7,17 @@ f_logo:
   url: >-
     https://uploads-ssl.webflow.com/5b5e7fdbc3f7cb0f3d48d134/5b5e7fdbc3f7cb7ea848d3e0_tccc.png
   alt: null
-updated-on: '2023-02-16T19:47:05.544Z'
+updated-on: '2024-07-23T05:45:15.954Z'
 created-on: '2018-07-23T22:28:45.091Z'
-published-on: '2023-02-16T19:47:14.615Z'
+published-on: '2024-07-23T05:46:13.068Z'
 f_seq: 1
 f_address: |-
-  13D Andromeda Crescent,
-  East Tamaki,
-  Auckland 2013
-f_email: bookings@tccc.co.nz
+  25B Norman Spencer Drive
+  Papatoetoe
+  Auckland 2104
+f_email: info@carcleaning.nz
 f_phone: (0800) 447 666
-f_phone-2: (09) 527 7730
+f_phone-2: 09 527 7730
 layout: '[company].html'
 tags: company
 ---

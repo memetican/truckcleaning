@@ -1,5 +1,5 @@
 ---
-f_url: http://transportcleaning.nz
+f_url: https://www.transportcleaning.nz/
 f_brief: Full sanitization, and special services such as cleaning.
 title: The Heavy Transport Cleaning Company
 slug: heavy-transport-cleaning-company
@@ -7,16 +7,16 @@ f_logo:
   url: >-
     https://uploads-ssl.webflow.com/5b5e7fdbc3f7cb0f3d48d134/5b5e7fdbc3f7cba63648d3dd_thtcc.png
   alt: null
-updated-on: '2023-02-24T04:25:43.394Z'
+updated-on: '2024-07-23T05:43:25.782Z'
 created-on: '2018-07-23T22:30:35.623Z'
-published-on: '2023-02-24T04:25:57.285Z'
+published-on: '2024-07-23T05:46:13.068Z'
 f_seq: 3
 f_address: |-
-  13D Andromeda Crescent,
-  East Tamaki,
-  Auckland 2013
-f_phone: (09) 257 3172
-f_email: bookings@tccc.co.nz
+  25B Norman Spencer Drive
+  Papatoetoe
+  Auckland 2104
+f_phone: 09 527 7730
+f_email: info@carcleaning.nz
 layout: '[company].html'
 tags: company
 ---

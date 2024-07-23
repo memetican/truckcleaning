@@ -6,16 +6,16 @@ f_logo:
   url: >-
     https://uploads-ssl.webflow.com/5b5e7fdbc3f7cb0f3d48d134/5b5e7fdbc3f7cb375748d3de_tbcc.png
   alt: null
-updated-on: '2023-02-16T19:45:40.375Z'
+updated-on: '2024-07-23T05:42:29.296Z'
 created-on: '2018-07-23T22:31:04.969Z'
-published-on: '2023-02-16T19:47:14.615Z'
+published-on: '2024-07-23T05:46:13.068Z'
 f_seq: 4
 f_address: |-
-  13D Andromeda Crescent,
-  East Tamaki,
-  Auckland 2013
-f_phone: (09) 257 3172
-f_email: bookings@tccc.co.nz
+  25B Norman Spencer Drive
+  Papatoetoe
+  Auckland 2104
+f_phone: 09 527 7730
+f_email: info@carcleaning.nz
 layout: '[company].html'
 tags: company
 ---

@@ -1,5 +1,5 @@
 ---
-f_url: http://truckcleaning.nz
+f_url: https://www.truckcleaning.co.nz/
 f_brief: The only mobile truck was in New Zealand!
 title: The Truck Cleaning Company
 f_logo:
@@ -7,16 +7,16 @@ f_logo:
     https://uploads-ssl.webflow.com/5b5e7fdbc3f7cb0f3d48d134/5b5e7fdbc3f7cb0aff48d3df_ttcc.png
   alt: null
 slug: truck-cleaning-company
-updated-on: '2023-02-16T19:46:29.687Z'
+updated-on: '2024-07-23T05:44:22.601Z'
 created-on: '2018-07-23T22:29:21.209Z'
-published-on: '2023-02-16T19:47:14.615Z'
+published-on: '2024-07-23T05:46:13.068Z'
 f_seq: 2
 f_address: |-
-  13D Andromeda Crescent,
-  East Tamaki,
-  Auckland 2013
-f_phone: (09) 257 3172
-f_email: bookings@tccc.co.nz
+  25B Norman Spencer Drive
+  Papatoetoe
+  Auckland 2104
+f_phone: 09 527 7730
+f_email: info@carcleaning.nz
 layout: '[company].html'
 tags: company
 ---
